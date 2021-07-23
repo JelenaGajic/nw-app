@@ -1,50 +1,56 @@
 <template>
   <div id="app">
-    <img
-      src="@/assets/logo.png"
-      alt="Vue.js logo"
-      title="Vue.js"
-      class="logo"
-    />
-    <img
-      v-if="isDesktop"
-      src="@/assets/nw.png"
-      alt="NW.js logo"
-      title="NW.js"
-      class="logo"
-    />
-    <HelloWorld :msg="message" />
+    <b-nav class="navbar-custom">
+      <b-nav-item active>NavBar</b-nav-item>
+      <b-button v-b-toggle.sidebar>Menu</b-button>
+    </b-nav>
+    <b-sidebar id="sidebar" title="Menu">
+      <div class="px-3 py-2">
+        <b-list-group>
+          <b-list-group-item href="/#/">
+            Hours log
+          </b-list-group-item>
+          <b-list-group-item href="/#/projects">
+            Projects
+          </b-list-group-item>
+        </b-list-group>
+        <b-list-group class="mt-2">
+          <b-list-group-item href="/">
+            Exports
+          </b-list-group-item>
+          <b-list-group-item href="/">
+            Settings
+          </b-list-group-item>
+        </b-list-group>
+      </div>
+    </b-sidebar>
+    <router-view />
   </div>
 </template>
 
-<script>
-import HelloWorld from '@/components/HelloWorld.vue';
-
-export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  },
-  computed: {
-    message: function () {
-      if (this.isDesktop) {
-        return 'Welcome to your Vue.js Desktop App in NW.js!';
-      }
-      return 'Welcome to your Vue.js Web App!';
-    }
-  }
-};
-</script>
-
 <style>
 #app {
-  margin-top: 60px;
-  color: #2C3E50;
-  font-family: 'Avenir', sans-serif;
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   text-align: center;
+  color: #2c3e50;
 }
-.logo {
-  max-height: 140px;
-  margin: 0px 10px;
+
+#nav {
+  padding: 30px;
+}
+
+#nav a {
+  font-weight: bold;
+  color: #2c3e50;
+}
+
+#nav a.router-link-exact-active {
+  color: #42b983;
+}
+
+.navbar-custom {
+  background: #3e3e3e;
 }
 </style>

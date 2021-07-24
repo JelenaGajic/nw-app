@@ -34,16 +34,6 @@ module.exports = {
     'no-restricted-syntax': [
       'error',
       'Property[method="true"]'
-    ],
-    'vuejs-accessibility/label-has-for': [
-      'error',
-      {
-        'components': ['Label'],
-        'required': {
-          'some': ['nesting', 'id']
-        },
-        'allowChildren': false
-      }
     ]
   }
 };

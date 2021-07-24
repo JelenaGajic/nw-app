@@ -1,3 +1,5 @@
+/* eslint-disable no-undef */
+/* eslint-disable no-unused-vars */
 import Vue from 'vue';
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue';
 import vSelect from 'vue-select';
@@ -19,10 +21,13 @@ Vue.use(IconsPlugin);
 Vue.component('v-select', vSelect);
 // eslint-disable-next-line vue/component-definition-name-casing
 Vue.component('date-picker', DatePicker);
-Vue.config.productionTip = false;
 applyPrototypes(Vue);
 
-// eslint-disable-next-line no-unused-vars
+// db
+// PouchDB.debug.enable('*');
+// const db = new PouchDB('hoursTracking');
+
+Vue.config.productionTip = false;
 const app = new Vue({
   router,
   store,

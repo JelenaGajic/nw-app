@@ -8,7 +8,9 @@
             <h1>Projects</h1>
           </b-col>
           <b-col>
-            <b-btn variant="primary">+ Add New Project</b-btn>
+            <b-btn variant="primary" @click="$router.push({name : 'ProjectEntry'})">
+              + Add New Project
+            </b-btn>
           </b-col>
         </b-row>
         <b-col />

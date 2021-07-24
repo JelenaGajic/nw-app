@@ -19,15 +19,31 @@
 	
     <b-row>
       <b-col>
-        <v-select :options="[{label: 'Canada', code: 'ca'}]" />
+        <v-select :options="projectItems" />
       </b-col>
     </b-row>
   </b-container>
 </template>
 
 <script>
+import { mapActions, mapState } from 'vuex';
 /* eslint-disable no-restricted-syntax */
 export default {
-  name: 'Projects'
+  name: 'Projects',
+  methods: {
+    ...mapActions(['readProjects'])
+  },
+  computed: {
+    ...mapState(['projects']),
+    projectItems () {
+      return this.projects.map(project => {
+        return project.name;
+      });
+    }
+  },
+  mounted () {
+    this.readProjects();
+    console.log(this.projectItems);
+  }
 };
 </script>

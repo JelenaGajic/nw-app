@@ -1,4 +1,3 @@
-
 <template>
   <b-container>
     <b-row>
@@ -30,11 +29,9 @@
                 maxRows="6"
               />
             </b-form-group>
-			
             <b-form-group id="input-group-3" label="Color:" labelFor="input-3">
-              <input v-model="formData.color" type="color" />
+              <input v-model="formData.color" id="input-3" type="color" />
             </b-form-group>
-            
             <b-button type="submit" variant="primary">Submit</b-button>
             <b-button type="reset" variant="danger">Reset</b-button>
           </b-form>
@@ -45,6 +42,7 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex';
 /* eslint-disable no-restricted-syntax */
 export default {
   name: 'ProjectEntry',
@@ -58,8 +56,13 @@ export default {
     };
   },
   methods: {
-    onSubmit () {
-      
+    ...mapActions(['createProject']),
+    onSubmit (e) {
+      e.preventDefault();
+      console.log(this.formData);
+    
+      this.createProject(this.formData);
+    
     },
     onReset () {
       

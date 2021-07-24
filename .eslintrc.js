@@ -29,11 +29,5 @@ module.exports = {
     'plugin:vuejs-accessibility/recommended',
     'tjw-base',
     'tjw-vue'
-  ],
-  rules: {
-    'no-restricted-syntax': [
-      'error',
-      'Property[method="true"]'
-    ]
-  }
+  ]
 };

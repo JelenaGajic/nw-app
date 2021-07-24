@@ -17,7 +17,7 @@
             </b-form-group>
             
             <b-form-group id="input-group-2" label="End Date:" labelFor="input-2">
-              <date-picker v-model="formData.startDate" type="datetime" />
+              <date-picker v-model="formData.endDate" type="datetime" />
             </b-form-group>
             
             <b-button type="submit" variant="primary">Submit</b-button>
@@ -30,20 +30,23 @@
 </template>
 
 <script>
+import {mapActions} from 'vuex'
 /* eslint-disable no-restricted-syntax */
 export default {
   name: 'TimeEntry',
   data () {
     return {
       formData: {
-        startDate: {},
-        endDate: {}
+        startDate: '',
+        endDate: ''
       }
     };
   },
   methods: {
-    onSubmit () {
-      
+	  ...mapActions(['createTimeEntry']),
+    onSubmit (e) {
+		e.preventDefault();
+      this.createTimeEntry(this.formData);
     },
     onReset () {
       

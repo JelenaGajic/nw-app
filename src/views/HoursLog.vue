@@ -18,12 +18,19 @@
 	
     <b-row>
       <b-col>
-        <b-table striped hover :items="items" />
+        <b-table
+          striped
+          hover
+          :items="entries"
+          :fields="fields"
+        />
       </b-col>
     </b-row>
   </b-container></template>
 
 <script>
+import { mapActions, mapState } from 'vuex';
+import moment from 'moment';
 /* eslint-disable no-restricted-syntax */
 export default {
   name: 'HoursLog',
@@ -31,10 +38,29 @@ export default {
   },
   data () {
     return {
-      items: [
-        { projectName: 'Company #1', date : 'May 12, 2020', startTime: '7:00 am', endTime: '11:00 am' }
-      ]
+      fields: ['startDate', 'endDate' ]
     };
+  },
+  methods: {
+    ...mapActions(['readTimeEntries']),
+    formatDate (date) {
+      return moment(date).format('MM Do YYYY, h:mm a');
+    }
+  },
+  computed: {
+    ...mapState(['timeEntries']),
+    entries () {
+      return this.timeEntries.map(entry => {
+        return {
+          ...entry,
+          endDate: this.formatDate(entry.endDate),
+          startDate: this.formatDate(entry.startDate)
+        };
+      });
+    }
+  },
+  mounted () {
+    this.readTimeEntries();
   }
 };
 </script>

@@ -1,6 +1,6 @@
 # nw-vue-cli-example
 
-[![Build Status](https://travis-ci.org/nwutils/nw-vue-cli-example.svg?branch=master)](https://travis-ci.org/nwutils/nw-vue-cli-example)
+Project built from the course, hour tracking app, I phase: https://www.youtube.com/watch?v=ZcsCoTPPMD8&t=11s
 
 * 1.x releases use: Vue 2 + NW.js latest + Vue-CLI 4
 * 2.x releases use: Vue 3 + NW.js latest + Vue-CLI latest

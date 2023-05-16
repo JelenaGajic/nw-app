@@ -8,7 +8,7 @@ import { v4 as uuidv4 } from 'uuid';
 import router from '../router';
 
 // db
-const timeEntryDB = new PouchDB('timeEntry');
+const timeEntriesDB = new PouchDB('timeEntry');
 const projectsDB = new PouchDB('projects');
 
 Vue.use(Vuex);
@@ -33,31 +33,27 @@ export default new Vuex.Store({
   },
   actions: {
     async readTimeEntries ({ commit }) {
-      const docs = await timeEntryDB.allDocs({ include_docs: true });
-      console.log(docs.rows);
+      const docs = await timeEntriesDB.allDocs({ include_docs: true });
       commit('setTimeEntries', docs.rows);
     },
     async readProjects ({ commit }) {
       const docs = await projectsDB.allDocs({ include_docs: true });
-      console.log(docs.rows);
       commit('setProjects', docs.rows);
     },
     async createTimeEntry ({ commit }, payload) {
       try {
-        const res = await timeEntryDB.put({ _id: uuidv4(), ...payload });
-        console.log('success', res);
+        const res = await timeEntriesDB.put({ _id: uuidv4(), ...payload });
         router.push({ name: 'HoursLog' });
       } catch (error) {
-        console.log(error);
+        console.error(error);
       }
     },
     async createProject ({ commit }, payload) {
       try {
         const res = await projectsDB.put({ _id: uuidv4(), ...payload });
-        console.log('success', res);
         router.push({ name: 'Projects' });
       } catch (error) {
-        console.log(error);
+        console.error(error);
       }
     }
   },

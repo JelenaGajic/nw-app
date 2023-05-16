@@ -16,7 +16,7 @@
         <b-col />
       </b-col>
     </b-row>
-	
+
     <b-row>
       <b-col>
         <v-select :options="projectItems" />
@@ -43,7 +43,6 @@ export default {
   },
   mounted () {
     this.readProjects();
-    console.log(this.projectItems);
   }
 };
 </script>

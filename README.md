@@ -1,6 +1,10 @@
 # nw-vue-cli-example
 
-Project built from the course, hour tracking app, I phase: https://www.youtube.com/watch?v=ZcsCoTPPMD8&t=11s
+Project built from the course, hour tracking app:
+I phase: https://www.youtube.com/watch?v=ZcsCoTPPMD8&t=11s
+II phase: https://www.youtube.com/watch?v=btadke62pgQ
+
+Technology used: Vue, NW.js, Vue-Bootstrap, PouchDB
 
 * 1.x releases use: Vue 2 + NW.js latest + Vue-CLI 4
 * 2.x releases use: Vue 3 + NW.js latest + Vue-CLI latest

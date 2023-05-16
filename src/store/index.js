@@ -11,7 +11,6 @@ import router from '../router';
 const timeEntryDB = new PouchDB('timeEntry');
 const projectsDB = new PouchDB('projects');
 
-
 Vue.use(Vuex);
 
 export default new Vuex.Store({
@@ -30,7 +29,7 @@ export default new Vuex.Store({
         return project.doc;
       });
     }
-    
+
   },
   actions: {
     async readTimeEntries ({ commit }) {

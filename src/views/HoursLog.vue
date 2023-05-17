@@ -1,7 +1,7 @@
 <template>
   <b-container class="hours-log-page mt-5">
     <b-row>
-      <b-col sm="8" offsetSm="2">
+      <b-col sm="10" offsetSm="1">
         <b-row>
           <b-col>
             <h1>Hours Log</h1>
@@ -15,7 +15,7 @@
         <b-col />
       </b-col>
     </b-row>
-	
+
     <b-row>
       <b-col>
         <b-table
@@ -38,7 +38,7 @@ export default {
   },
   data () {
     return {
-      fields: ['startDate', 'endDate' ]
+      fields: ['project.label', 'startDate', 'endDate' ]
     };
   },
   methods: {

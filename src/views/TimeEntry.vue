@@ -11,6 +11,12 @@
         <b-row>
           <b-col>
             <b-form @submit="onSubmit" @reset="onReset">
+              <b-form-group id="input-group-0" label="Project" labelFor="input-0">
+                <v-select
+                  v-model="formData.project"
+                  :options="getProjects"
+                />
+              </b-form-group>
               <b-form-group id="input-group-1" label="Start date:" labelFor="input-1">
                 <date-picker v-model="formData.startDate" type="datetime" />
               </b-form-group>
@@ -33,27 +39,36 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex';
+import { mapActions, mapState, mapGetters } from 'vuex';
 /* eslint-disable no-restricted-syntax */
 export default {
   name: 'TimeEntry',
   data () {
     return {
       formData: {
+        project: '',
         startDate: '',
         endDate: ''
       }
     };
   },
   methods: {
-    ...mapActions(['createTimeEntry']),
+    ...mapActions(['createTimeEntry', 'readProjects']),
+
     onSubmit (e) {
       e.preventDefault();
       this.createTimeEntry(this.formData);
     },
-    onReset () {
 
+    onReset () {
     }
+  },
+  computed: {
+    ...mapState(['projects']),
+    ...mapGetters(['getProjects'])
+  },
+  mounted () {
+    this.readProjects();
   }
 };
 </script>

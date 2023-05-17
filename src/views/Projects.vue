@@ -19,14 +19,14 @@
 
     <b-row>
       <b-col>
-        <v-select :options="projectItems" />
+        <v-select :options="getProjects" />
       </b-col>
     </b-row>
   </b-container>
 </template>
 
 <script>
-import { mapActions, mapState } from 'vuex';
+import { mapActions, mapGetters, mapState } from 'vuex';
 /* eslint-disable no-restricted-syntax */
 export default {
   name: 'Projects',
@@ -35,11 +35,7 @@ export default {
   },
   computed: {
     ...mapState(['projects']),
-    projectItems () {
-      return this.projects.map(project => {
-        return project.name;
-      });
-    }
+    ...mapGetters(['getProjects'])
   },
   mounted () {
     this.readProjects();

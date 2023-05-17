@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <b-nav class="navbar-custom">
-      <b-nav-item active>NavBar</b-nav-item>
+      <b-nav-item active>Hours tracking</b-nav-item>
       <b-button v-b-toggle.sidebar>Menu</b-button>
     </b-nav>
     <b-sidebar id="sidebar" title="Menu">
@@ -18,7 +18,7 @@
           <b-list-group-item href="/">
             Exports
           </b-list-group-item>
-          <b-list-group-item href="/">
+          <b-list-group-item href="/#/settings">
             Settings
           </b-list-group-item>
         </b-list-group>

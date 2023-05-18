@@ -8,28 +8,27 @@
           </b-col>
           <b-col>
             <b-btn variant="primary" @click="$router.push({name : 'SettingsEdit'})">
-              Edit settings
+              {{ user ? 'Edit': 'Create User' }}
             </b-btn>
           </b-col>
         </b-row>
         <b-col />
       </b-col>
     </b-row>
-    <b-row clas="mt-5 mb-4">
+    <b-row v-if="user" class="mt-5 mb-4">
       <b-col sm="8" offsetSm="2">
         <h2>Profile info</h2>
-        <p>First Name: Jelena Gajic</p>
-        <p>Last name: Jelena Gajic</p>
-        <p>Email: email</p>
-        <p>Address1: Jelena Gajic</p>
-        <p>Address2: Jelena Gajic</p>
-        <p>Email: Jelena Gajic</p>
-        <p>Street: Jelena Gajic</p>
-        <p>City: Jelena Gajic</p>
-        <p>State: Jelena Gajic</p>
-        <p>Zip: Jelena Gajic</p>
-        <p>Country: Jelena Gajic</p>
-        <p>Phone: Jelena Gajic</p>
+        <p>First Name:  {{ user.firstName }}</p>
+        <p>Last name: {{ user.lastName }}</p>
+        <p>Email: {{ user.email }}</p>
+        <p>Address1: {{ user.address.street1 }}</p>
+        <p>Address2: {{ user.address.street2 }}</p>
+        <p>Street: {{ user.address.city }}</p>
+        <p>City: {{ user.address.state }}</p>
+        <p>State: {{ user.address.zip }}</p>
+        <p>Zip: {{ user.address.zip }}</p>
+        <p>Country: {{ user.address.zip }}</p>
+        <p>Phone: {{ user.address.zip }}</p>
         <b-col />
       </b-col>
     </b-row>
@@ -43,6 +42,17 @@
 </template>
 
 <script>
+import { mapState, mapActions } from 'vuex';
+
 export default {
+  methods: {
+    ...mapActions(['readUser'])
+  },
+  computed: {
+    ...mapState(['user'])
+  },
+  mounted () {
+    this.readUser();
+  }
 };
 </script>

@@ -27,7 +27,6 @@
         <p>City: {{ user.address.state }}</p>
         <p>State: {{ user.address.zip }}</p>
         <p>Zip: {{ user.address.zip }}</p>
-        <p>Country: {{ user.address.zip }}</p>
         <p>Phone: {{ user.address.zip }}</p>
         <b-col />
       </b-col>

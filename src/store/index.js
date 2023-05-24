@@ -101,6 +101,13 @@ export default new Vuex.Store({
     },
     async createUser ({ commit }, payload) {
       try {
+        if (payload.id) {
+          // first delete
+          db.rel.find('user', payload.id).then((user) => {
+            return db.rel.del('user', user);
+          });
+          // and then create another
+        }
         const res = await db.rel.save('user', {
           ...payload
         });

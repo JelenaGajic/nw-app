@@ -5,6 +5,7 @@ import Vuex from 'vuex';
 import PouchDB from 'pouchdb';
 import RelPouch from 'relational-pouch';
 import FindPouch from 'pouchdb-find';
+import UpsertPouch from 'pouchdb-upsert';
 
 import router from '../router';
 
@@ -12,9 +13,7 @@ import router from '../router';
 
 PouchDB.plugin(RelPouch);
 PouchDB.plugin(FindPouch);
-
-const timeEntriesDB = new PouchDB('timeEntry');
-const projectsDB = new PouchDB('projects');
+PouchDB.plugin(UpsertPouch);
 
 let db = new PouchDB('hourTracking');
 db.setSchema([
@@ -102,16 +101,25 @@ export default new Vuex.Store({
     async createUser ({ commit }, payload) {
       try {
         if (payload.id) {
-          // first delete
-          db.rel.find('user', payload.id).then((user) => {
-            return db.rel.del('user', user);
+          // update user
+          db.upsert('user', function (doc) {
+            return { ...payload };
+          }).then(function (res) {
+            // success, res is {rev: '1-xxx', updated: true, id: 'myDocId'}
+            console.log(res);
+            console.log('upsert -----------------------res._doc_id_rev');
+          }).catch(function (err) {
+            // error
           });
-          // and then create another
+          commit('setUser', { ...payload });
+        } else {
+          const res = await db.rel.save('user', {
+            ...payload
+          });
+          console.log(res);
+          console.log('create ----------------- res._doc_id_rev');
+          commit('setUser', { ...payload, id: res._doc_id_rev });
         }
-        const res = await db.rel.save('user', {
-          ...payload
-        });
-        commit('setUser', { ...payload, id: res.id });
         router.push({ name: 'Settings' });
       } catch (err) {
         console.error(err);

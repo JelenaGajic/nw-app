@@ -80,6 +80,7 @@ export default new Vuex.Store({
       const docs = await db.rel.find('user');
       // returned array
       console.log(docs.users[0]);
+      console.log('user read');
       commit('setUser', docs.users[0]);
     },
     async createTimeEntry ({ commit }, payload) {
@@ -100,14 +101,12 @@ export default new Vuex.Store({
     },
     async createUser ({ commit }, payload) {
       try {
-        if (payload.id) {
+        if (payload.rev) {
           // update user
-          db.upsert('user', function (doc) {
+          db.put(payload.rev, function (doc) {
             return { ...payload };
           }).then(function (res) {
             // success, res is {rev: '1-xxx', updated: true, id: 'myDocId'}
-            console.log(res);
-            console.log('upsert -----------------------res._doc_id_rev');
           }).catch(function (err) {
             // error
           });
@@ -116,9 +115,7 @@ export default new Vuex.Store({
           const res = await db.rel.save('user', {
             ...payload
           });
-          console.log(res);
-          console.log('create ----------------- res._doc_id_rev');
-          commit('setUser', { ...payload, id: res._doc_id_rev });
+          commit('setUser', { ...payload, rev: res.rev });
         }
         router.push({ name: 'Settings' });
       } catch (err) {

@@ -107,7 +107,7 @@ export default {
         email: this.email,
         address: this.address
       };
-      if (this.user && this.user.rev) {
+      if (this.user && this.user.id) {
         payload.id = this.user.rev;
       }
       this.createUser(payload);

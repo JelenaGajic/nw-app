@@ -102,6 +102,10 @@ export default new Vuex.Store({
     async createUser ({ commit }, payload) {
       try {
         if (payload.rev) {
+          // first delete old doc
+          db.get('user').then(function (doc) {
+            return db.remove(doc);
+          });
           // update user
           db.put(payload.rev, function (doc) {
             return { ...payload };
